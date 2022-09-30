@@ -1,3 +1,4 @@
+from tkinter.ttk import Style
 from morse_code_dict import MORSE_CODE_DICTIONARY
 from tkinter import *
 
@@ -35,20 +36,21 @@ def decrypt():
 root = Tk()
 root.title('English to Morse Code Translator')
 root.config(padx=50, pady=50)
+root.resizable(False, False)
 
-message_label = Label(text="English")
+message_label = Label(text="English", font=("Inter", 20))
 message_label.grid(sticky='W', column=0, row=0, pady=(0, 16))
 
-message_entry = Text(width=70, height=10)
+message_entry = Text(width=70, height=10, font=("Inter", 16))
 message_entry.grid(column=0, row=1, columnspan=3)
 
-msg_translate_button = Button(text="Translate", command=encrypt)
+msg_translate_button = Button(text="Translate", bg='blue', command=encrypt)
 msg_translate_button.grid(column=2, row=2, sticky='NE')
 
-cipher_label = Label(text="Morse")
+cipher_label = Label(text="Morse", font=("Inter", 20))
 cipher_label.grid(sticky='W', column=0, row=3, pady=(48, 16))
 
-cipher_entry = Text(width=70, height=10)
+cipher_entry = Text(width=70, height=10, font=("Inter", 16))
 cipher_entry.grid(column=0, row=4, columnspan=3)
 
 cph_translate_button = Button(text="Translate", command=decrypt)
