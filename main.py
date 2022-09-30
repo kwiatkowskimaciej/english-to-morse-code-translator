@@ -1,6 +1,7 @@
-from tkinter.ttk import Style
-from morse_code_dict import MORSE_CODE_DICTIONARY
+import os.path
 from tkinter import *
+from playsound import playsound
+from morse_code_dict import MORSE_CODE_DICTIONARY
 
 
 def encrypt():
@@ -33,6 +34,16 @@ def decrypt():
     message_entry.insert(INSERT, decrypted_message)
 
 
+def play():
+    encrypted_message = cipher_entry.get("1.0", 'end-1c')
+
+    for char in encrypted_message:
+        if char == '.':
+            playsound('dot.mp3')
+        elif char == '-':
+            playsound('dash.mp3')
+
+
 root = Tk()
 root.title('English to Morse Code Translator')
 root.config(padx=50, pady=50)
@@ -55,5 +66,8 @@ cipher_entry.grid(column=0, row=4, columnspan=3)
 
 cph_translate_button = Button(text="Translate", command=decrypt)
 cph_translate_button.grid(column=2, row=5, sticky='NE')
+
+cph_play_button = Button(text='Play', command=play)
+cph_play_button.grid(column=2, row=5)
 
 root.mainloop()
