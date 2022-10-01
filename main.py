@@ -11,6 +11,8 @@ def encrypt():
     for char in message.lower():
         if char == ' ':
             encrypted_message += ' '
+        elif char == '\n':
+            encrypted_message += '\n'
         else:
             encrypted_message += MORSE_CODE_DICTIONARY[char] + ' '
 
@@ -25,6 +27,11 @@ def decrypt():
     inv_morse_code_dict = {code: char for char, code in MORSE_CODE_DICTIONARY.items()}
 
     for char_code in char_codes:
+
+        if '\n' in char_code:
+            decrypted_message += '\n'
+            char_code = char_code.strip('\n')
+
         if char_code == '':
             decrypted_message += ' '
         else:
