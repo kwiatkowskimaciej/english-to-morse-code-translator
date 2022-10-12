@@ -1,7 +1,10 @@
-import os.path
 from tkinter import *
 from playsound import playsound
 from morse_code_dict import MORSE_CODE_DICTIONARY
+import time
+import threading
+
+stop = False
 
 
 def encrypt():
@@ -41,14 +44,35 @@ def decrypt():
     message_entry.insert(INSERT, decrypted_message)
 
 
+def play_thread():
+    global stop
+    stop = False
+    t1 = threading.Thread(target=play)
+    t1.start()
+
+
 def play():
     encrypted_message = cipher_entry.get("1.0", 'end-1c')
+    UNIT = 0.5
+    THREE_UNITS = 1 * UNIT
+    SEVEN_UNITS = 3 * UNIT
 
     for char in encrypted_message:
-        if char == '.':
+        if stop:
+            break
+        elif char == '.':
             playsound('dot.mp3')
+            time.sleep(THREE_UNITS)
         elif char == '-':
             playsound('dash.mp3')
+            time.sleep(THREE_UNITS)
+        elif char == ' ':
+            time.sleep(SEVEN_UNITS)
+
+
+def play_stop():
+    global stop
+    stop = True
 
 
 root = Tk()
@@ -74,7 +98,10 @@ cipher_entry.grid(column=0, row=4, columnspan=3)
 cph_translate_button = Button(text="Translate", command=decrypt)
 cph_translate_button.grid(column=2, row=5, sticky='NE')
 
-cph_play_button = Button(text='Play', command=play)
+cph_play_button = Button(text='Play', command=play_thread)
 cph_play_button.grid(column=2, row=5)
+
+cph_stop_button = Button(text='Stop', command=play_stop)
+cph_stop_button.grid(column=1, row=5)
 
 root.mainloop()
