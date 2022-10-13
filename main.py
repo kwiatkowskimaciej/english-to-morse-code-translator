@@ -53,21 +53,16 @@ def play_thread():
 
 def play():
     encrypted_message = cipher_entry.get("1.0", 'end-1c')
-    UNIT = 0.5
-    THREE_UNITS = 1 * UNIT
-    SEVEN_UNITS = 3 * UNIT
 
     for char in encrypted_message:
         if stop:
             break
         elif char == '.':
             playsound('dot.mp3')
-            time.sleep(THREE_UNITS)
         elif char == '-':
             playsound('dash.mp3')
-            time.sleep(THREE_UNITS)
         elif char == ' ':
-            time.sleep(SEVEN_UNITS)
+            time.sleep(0.6)
 
 
 def play_stop():
