@@ -80,6 +80,9 @@ root.title('English to Morse Code Translator')
 root.config(padx=50, pady=50)
 root.resizable(False, False)
 
+multiple_btn_frame = Frame(root, borderwidth=0, relief="groove")
+multiple_btn_frame.grid(column=2, row=5, sticky='NE')
+
 message_label = Label(text="English", font=("Inter", 20))
 message_label.grid(sticky='W', column=0, row=0, pady=(0, 16))
 
@@ -95,13 +98,13 @@ cipher_label.grid(sticky='W', column=0, row=3, pady=(48, 16))
 cipher_entry = Text(width=70, height=10, font=("Inter", 16))
 cipher_entry.grid(column=0, row=4, columnspan=3)
 
-cph_translate_button = Button(text="Translate", command=decrypt)
-cph_translate_button.grid(column=2, row=5, sticky='NE')
+cph_translate_button = Button(multiple_btn_frame, text="Translate", command=decrypt)
+cph_translate_button.grid(column=2, row=0, sticky='NE')
 
-cph_play_button = Button(text='Play', command=play_thread)
-cph_play_button.grid(column=2, row=5)
+cph_play_button = Button(multiple_btn_frame, text='Play', command=play_thread)
+cph_play_button.grid(column=1, row=0)
 
-cph_stop_button = Button(text='Stop', command=play_stop)
-cph_stop_button.grid(column=1, row=5)
+cph_stop_button = Button(multiple_btn_frame, text='Stop', command=play_stop)
+cph_stop_button.grid(column=0, row=0)
 
 root.mainloop()
